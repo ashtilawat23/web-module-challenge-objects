@@ -5,7 +5,6 @@
 ///////////////Menu Items (MVP)///////////////////
 const latte = {name: "Cafe Latte", price: 4, category: "Drinks"};
 const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakfast"};
-
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1a: Make a function that builds objects🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Add to the function createMenuItems below so it will create objects following the same format found above for latte and breakfastBurrito (name, price, category).  
 The function should:
@@ -14,7 +13,7 @@ The function should:
 */
 
 function createMenuItem(na, co, ca){      
-  return {name:na,cost:co,category:ca}
+  return {name:na,price:co,category:ca}
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -31,8 +30,8 @@ menu.push(createMenuItem("Coffee",3,"Drinks"));
 menu.push(createMenuItem("BLT",5,"Lunch"));
 menu.push(createMenuItem("Penne Vodka",7,"Dinner"));
 menu.push(latte);
-menu.push(burger);
 menu.push(breakfastBurrito);
+
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to the 
@@ -47,13 +46,17 @@ Using the burger object below do the following:
   For example: burger.discount("teacher") would return 13.5 and burger.discount("public") would return 16.2
 */
 
-burger.discount = function(tempstr){
-  if(tempstr==="teacher" || tempstr==="student"){
-  return burger.price*0.75
+export const burger = {
+  name: "Burger", 
+  price: 18, 
+  category: "Lunch", 
+  discount: function(tempstr){
+    if(tempstr==="teacher" || tempstr==="student"){
+    return burger.price*0.75
+    }
+    return burger.price*0.90
   }
-  return burger.price*0.90
 }
-
 
 
 ///////////////Reviews (MVP)///////////////////
@@ -109,11 +112,11 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewbyIndex(arry,idx){
-  return arry[idx]
+function getReviewByIndex(arry,idx){
+  return arry[idx].name+' gave the restaurant a '+arry[idx].rating+' star review, and their feedback was: '+arry[idx].feedback
 }
 
-console.log(getReviewbyIndex(reviews,6)
+console.log(getReviewByIndex(reviews,0))
 
 
   
@@ -131,20 +134,67 @@ Use the getLastReview function below to do the following:
 
 function getLastReview(arry){
   const lastReview = arry[arry.length-1]
-  return lastReview.name + " gave the restaurant a " + lastReview.rating + " star review and, their feedback was: " + lastReview.feedback
+  return lastReview.name + " gave the restaurant a " + lastReview.rating + " star review, and their feedback was: " + lastReview.feedback
 } 
 
-
-
-/* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
-function foo(){
-  console.log('its working');
-  return 'bar';
+///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
+/** 💪💪💪💪💪💪💪💪💪💪 STRETCH 1: 💪💪💪💪💪💪💪💪💪💪 
+Use the getReviewsByRating function below to do the following:
+  1. Receive the array that holds all the reviews
+  2. Receive a rating
+  3. Return an array with all the reviews in that range
+  For example: getReviewByRating(reviews, 4) would return these reviews in the 4 range (4-4.9):
+  [
+    {name: "Miranda", rating: 4, feedback:"fun trivia and cool vibes"},
+    {name: "Wen", rating: 4.5, feedback:"I don't leave my house often, but when I do, it's for this place. Highly reccomend."},
+    {name:"Lauren", rating: 4, feedback: "Absolutely love that they have karaoke Fridays! Food and drink selection is okay."}
+  ]
+*/
+function getReviewByRating(/* code here */) {
+  /* code here */
 }
 
+/* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
+Use the getLongReviews function below to do the following:
+1. Receive the array that holds all the reviews
+2. Return an array with all the reviews that have more than 15 words in their feedback
+For example: getLongReviews(reviews) would return:
+[
+  {name: "Wen", rating: 4.5, feedback:"I don't leave my house often, but when I do, it's for this place. Highly reccomend."},
+  {name: "Brett", rating: 3, feedback: "great selection of snacks and a nice cafe area to get work done during the day."},
+  {name: "Julius", rating: 2, feedback: "I was largely unimpressed by this venue. Nothing special on the menu and too expensive. The atmosphere is polarizing, and not for me, but I think some would like it." }
+]
+*/
+function getLongReviews(/* code here */) {
+  /* code here */
+}
+
+/* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
+This stretch goal does not use the reviews data!  You create your own object in this stretch goal.
+Use the carMaker function below to do the following:
+1. Receive a value representing the odometer (how many miles it's been driven) and use that when creating the object
+2. Create a drive method inside the object that increases the odometer value
+3. Return the object
+4. The returned object with the odometer value should have the following characteristics:
+   a. The drive method which, when called, takes a distance value as its parameter
+   b. The drive method should also cause the odometer value in the object to be increased by the distance
+   c. Then the drive method should return the updated value of the odometer
+For example: Let's say we created the object in the variable car1 with an odometer value of 10.
+Then we called car1.drive(100)
+It would return 110 because it was created with 10 as the odometer and we added 100 to it with the drive method 
+*/
+function carMaker(/* code here */) {
+  /* code here */
+  
+}
+/* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
+function foo(){
+console.log('its working');
+return 'bar';
+}
 export default{
-  foo,
-  createMenuItem,
-  getReviewByIndex,
-  getLastReview,
+foo,
+createMenuItem,
+getReviewByIndex,
+getLastReview,
 }
