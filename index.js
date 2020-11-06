@@ -5,7 +5,6 @@
 ///////////////Menu Items (MVP)///////////////////
 const latte = {name: "Cafe Latte", price: 4, category: "Drinks"};
 const breakfastBurrito = {name: "Breakfast Burrito", price: 16, category:"Breakfast"};
-
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1a: Make a function that builds objects🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Add to the function createMenuItems below so it will create objects following the same format found above for latte and breakfastBurrito (name, price, category).  
 The function should:
@@ -13,8 +12,8 @@ The function should:
   2. Create and return an object using the received values  
 */
 
-function createMenuItem(/*Your code here*/){
-    /*Your code here*/
+function createMenuItem(na, co, ca){      
+  return {name:na,price:co,category:ca}
 }
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -26,6 +25,12 @@ Test your createMenuItems function by doing the following:
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
 
+let menu = [];
+menu.push(createMenuItem("Coffee",3,"Drinks"));
+menu.push(createMenuItem("BLT",5,"Lunch"));
+menu.push(createMenuItem("Penne Vodka",7,"Dinner"));
+menu.push(latte);
+menu.push(breakfastBurrito);
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -45,9 +50,13 @@ export const burger = {
   name: "Burger", 
   price: 18, 
   category: "Lunch", 
-  /*Your code here*/
+  discount: function(tempstr){
+    if(tempstr==="teacher" || tempstr==="student"){
+    return burger.price*0.75
+    }
+    return burger.price*0.90
+  }
 }
-
 
 
 ///////////////Reviews (MVP)///////////////////
@@ -67,7 +76,7 @@ Using the reviews array above:
   1. log only Julius' feedback to the console
 */
 
-
+console.log(reviews[5].feedback)
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -76,7 +85,11 @@ Using the reviews array above do the following:
   2. log the whole array to the console, make sure the new review is inside of it   
 */
 
-
+function createNewReview(name,rating,feedback){
+  return {name,rating,feedback}
+}
+reviews.push(createNewReview("Tompa Bay",2.5,"Just okay, not that great!"));
+console.log(reviews[8]);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Reyna's feedback is missing! Use what you know to do the following:
@@ -84,7 +97,8 @@ Reyna's feedback is missing! Use what you know to do the following:
   2. log the reviews array to the console to check your work
 */
 
-
+reviews[7].feedback="This place is chill with really cool people, great for getting work done on weekdays";
+console.log(reviews[7].feedback)
 
 
 
@@ -98,9 +112,11 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(arry,idx){
+  return arry[idx].name+' gave the restaurant a '+arry[idx].rating+' star review, and their feedback was: '+arry[idx].feedback
 }
+
+console.log(getReviewByIndex(reviews,0))
 
 
   
@@ -116,20 +132,17 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(arry){
+  const lastReview = arry[arry.length-1]
+  return lastReview.name + " gave the restaurant a " + lastReview.rating + " star review, and their feedback was: " + lastReview.feedback
 } 
 
-
-
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
-
 /** 💪💪💪💪💪💪💪💪💪💪 STRETCH 1: 💪💪💪💪💪💪💪💪💪💪 
 Use the getReviewsByRating function below to do the following:
   1. Receive the array that holds all the reviews
   2. Receive a rating
   3. Return an array with all the reviews in that range
-
   For example: getReviewByRating(reviews, 4) would return these reviews in the 4 range (4-4.9):
   [
     {name: "Miranda", rating: 4, feedback:"fun trivia and cool vibes"},
@@ -137,63 +150,51 @@ Use the getReviewsByRating function below to do the following:
     {name:"Lauren", rating: 4, feedback: "Absolutely love that they have karaoke Fridays! Food and drink selection is okay."}
   ]
 */
+function getReviewByRating(/* code here */) {
+  /* code here */
+}
 
- function getReviewByRating(/* code here */) {
-    /* code here */
-  }
-
-  
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
 Use the getLongReviews function below to do the following:
-  1. Receive the array that holds all the reviews
-  2. Return an array with all the reviews that have more than 15 words in their feedback
-
-  For example: getLongReviews(reviews) would return:
-  [
-    {name: "Wen", rating: 4.5, feedback:"I don't leave my house often, but when I do, it's for this place. Highly reccomend."},
-    {name: "Brett", rating: 3, feedback: "great selection of snacks and a nice cafe area to get work done during the day."},
-    {name: "Julius", rating: 2, feedback: "I was largely unimpressed by this venue. Nothing special on the menu and too expensive. The atmosphere is polarizing, and not for me, but I think some would like it." }
-  ]
+1. Receive the array that holds all the reviews
+2. Return an array with all the reviews that have more than 15 words in their feedback
+For example: getLongReviews(reviews) would return:
+[
+  {name: "Wen", rating: 4.5, feedback:"I don't leave my house often, but when I do, it's for this place. Highly reccomend."},
+  {name: "Brett", rating: 3, feedback: "great selection of snacks and a nice cafe area to get work done during the day."},
+  {name: "Julius", rating: 2, feedback: "I was largely unimpressed by this venue. Nothing special on the menu and too expensive. The atmosphere is polarizing, and not for me, but I think some would like it." }
+]
 */
-
 function getLongReviews(/* code here */) {
-    /* code here */
-  }
-  
+  /* code here */
+}
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
 This stretch goal does not use the reviews data!  You create your own object in this stretch goal.
-
 Use the carMaker function below to do the following:
-  1. Receive a value representing the odometer (how many miles it's been driven) and use that when creating the object
-  2. Create a drive method inside the object that increases the odometer value
-  3. Return the object
-  4. The returned object with the odometer value should have the following characteristics:
-     a. The drive method which, when called, takes a distance value as its parameter
-     b. The drive method should also cause the odometer value in the object to be increased by the distance
-     c. Then the drive method should return the updated value of the odometer
-
-  For example: Let's say we created the object in the variable car1 with an odometer value of 10.
-  Then we called car1.drive(100)
-  It would return 110 because it was created with 10 as the odometer and we added 100 to it with the drive method 
+1. Receive a value representing the odometer (how many miles it's been driven) and use that when creating the object
+2. Create a drive method inside the object that increases the odometer value
+3. Return the object
+4. The returned object with the odometer value should have the following characteristics:
+   a. The drive method which, when called, takes a distance value as its parameter
+   b. The drive method should also cause the odometer value in the object to be increased by the distance
+   c. Then the drive method should return the updated value of the odometer
+For example: Let's say we created the object in the variable car1 with an odometer value of 10.
+Then we called car1.drive(100)
+It would return 110 because it was created with 10 as the odometer and we added 100 to it with the drive method 
 */
-
-
 function carMaker(/* code here */) {
-    /* code here */
-    
+  /* code here */
+  
 }
-
-
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
 function foo(){
-  console.log('its working');
-  return 'bar';
+console.log('its working');
+return 'bar';
 }
-
 export default{
-  foo,
-  createMenuItem,
-  getReviewByIndex,
-  getLastReview,
+foo,
+createMenuItem,
+getReviewByIndex,
+getLastReview,
 }
